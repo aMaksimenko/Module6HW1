@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  catalog_host:
+    build:
+      context: .
+      dockerfile: ./Catalog.Host/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5001
+    ports:
+      - 5001:5001
+  
+  web:
+    image: nginx
+    ports:
+      - "8080:80"
+    environment:
+      - NGINX_HOST=foobar.com
+      - NGINX_PORT=80
